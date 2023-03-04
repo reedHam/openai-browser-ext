@@ -1,0 +1,24 @@
+{
+  "name": "vite-template-solid",
+  "version": "0.0.0",
+  "description": "",
+  "scripts": {
+    "start": "vite",
+    "dev": "vite",
+    "build": "vite build && web-ext build --overwrite-dest -s ./build/dist -a ./build/ && cp -f ./build/*.zip /mnt/e/extensions/",
+    "sign": "web-ext sign --api-key $(grep WEB_EXT_API_KEY .env | cut -d '=' -f2) --api-secret $(grep WEB_EXT_API_SECRET .env | cut -d '=' -f2) -s ./build/dist -a ./build/",
+    "serve": "vite preview"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^4.6.3",
+    "vite": "^2.8.6",
+    "vite-plugin-solid": "^2.2.6",
+    "vite-plugin-web-extension": "^1.3.1"
+  },
+  "dependencies": {
+    "solid-js": "^1.3.13",
+    "web-ext": "^6.8.0",
+    "webext-bridge": "^5.0.4"
+  }
+}
