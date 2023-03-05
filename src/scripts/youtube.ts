@@ -3,5 +3,3 @@
  */
 
 import { sendMessage } from 'webext-bridge';
-
-sendMessage("test", { a: "speed", b: 2 }).then(console.log);

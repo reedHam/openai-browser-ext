@@ -1,4 +1,5 @@
 import { defineConfig } from 'vite';
+
 import solidPlugin from 'vite-plugin-solid';
 import webExtension from "vite-plugin-web-extension";
 import path from 'path';
