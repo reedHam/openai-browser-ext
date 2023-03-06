@@ -121,6 +121,29 @@ class OpenAI {
         this.writeChatThread(chatThread, threadId);
         return chatThread;
     }
+
+    public async summarize(text: string): Promise<string> {
+        const chatMessageThread = new ChatMessageThread([
+            {
+                role: 'system',
+                content: 'You are a tool that summarizes text. The outputs you provide are as short and concise as possible without leaving and important information out.',
+            },
+            {
+                role: 'user',
+                content: `Summarize this text: ${text}`
+            }
+        ]);
+
+        const res = await this.sendChatCompletionRequest(chatMessageThread);
+        
+        const finalChoice = res.choices.pop();
+        if (!finalChoice || !finalChoice.message || finalChoice.message.role !== 'assistant' || !finalChoice.message.content) {
+            throw new Error('No choices returned');
+        }
+
+        console.log(finalChoice.message.content);
+        return finalChoice.message.content;
+    }
 }
 
 onMessage('set_key', ({ data: { key } }) => {
@@ -140,6 +163,10 @@ onMessage('create_chat_thread', ({ data }) => {
 
 onMessage('send_chat_message', ({ data: { threadId, message } }) => {
     return openai.sendChatMessage(threadId, message);
+});
+
+onMessage('summarize', ({ data: { text } }) => {
+    return openai.summarize(text);
 });
 
 

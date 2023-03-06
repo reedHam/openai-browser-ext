@@ -11,7 +11,7 @@ const App: Component = () => {
   const [messageThread, setMessageThread] = createSignal<ChatMessage[]>([]);
   const [threadID, setThreadID] = createSignal('');
 
-  sendMessage('set_key', { key: "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" });
+  sendMessage('set_key', { key: "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" });
 
   return (
     <div class={styles.App}>
